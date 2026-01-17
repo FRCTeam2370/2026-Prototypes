@@ -22,4 +22,8 @@ public final class Constants {
     public static final int shooterMotorTwoID = 1;
     public static final int shooterAimMotorID = 2;
   }
+
+  public static class intakeConstants{
+    public static final int intakeMotorID = 3;
+  }
 }

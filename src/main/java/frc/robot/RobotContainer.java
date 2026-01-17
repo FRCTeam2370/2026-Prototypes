@@ -8,8 +8,10 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AimManualControl;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeControl;
 import frc.robot.commands.ShootShooter;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterPrototype;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -25,6 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ShooterPrototype mShooterPrototype = new ShooterPrototype();
+  private final IntakeSubsystem mIntakeSubsystem = new IntakeSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driver =
@@ -50,12 +53,15 @@ public class RobotContainer {
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    //Shooter Controls
     driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 30));
     driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -30));
     driver.rightBumper().whileTrue(new AimManualControl(mShooterPrototype, .1));
     driver.leftBumper().whileTrue(new AimManualControl(mShooterPrototype, -.1));
+
+    //Intake Controls
+    driver.y().whileTrue(new IntakeControl(mIntakeSubsystem, .9));
+    driver.a().whileTrue(new IntakeControl(mIntakeSubsystem, -.9));
 
   }
 

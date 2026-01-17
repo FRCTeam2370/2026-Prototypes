@@ -49,7 +49,6 @@ public class ShooterPrototype extends SubsystemBase {
 
   public static void shooterManualAim(double speed) {
     shooterAimMotor.set(speed);
-    //Speed intake as %
   }
 
   public static void shooterAimZero() {
@@ -65,7 +64,6 @@ public class ShooterPrototype extends SubsystemBase {
     SmartDashboard.putNumber("Motor Two Velocity", shooterMotorTwo.getVelocity().getValueAsDouble());
     SmartDashboard.putNumber("Shooter Aim Motor Current", shooterAimMotor.getStatorCurrent().getValueAsDouble());
   }
-
 
   public static void shooterMotorConfig() {
     shooterMotorOne.setNeutralMode(NeutralModeValue.Coast);
