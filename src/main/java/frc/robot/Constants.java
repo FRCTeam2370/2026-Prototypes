@@ -15,6 +15,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int driverController = 0;
+    public static final int operatorController = 1;
   }
 
   public static class shooterConstants {
@@ -25,5 +26,14 @@ public final class Constants {
 
   public static class intakeConstants{
     public static final int intakeMotorID = 3;
+  }
+
+  public static class uptakeConstants{
+    public static final int uptakeMotorID = 4;
+  }
+
+  public static class spindexerConstants{
+    public static final int spindexerMotorID = 5;
+    public static final int spindexerExitMotorID = 6;
   }
 }

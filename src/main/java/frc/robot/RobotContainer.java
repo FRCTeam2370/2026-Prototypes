@@ -7,12 +7,17 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AimManualControl;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ControlSpindexerExit;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeControl;
 import frc.robot.commands.ShootShooter;
+import frc.robot.commands.UptakeFuel;
+import frc.robot.commands.controlSpindexer;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterPrototype;
+import frc.robot.subsystems.UptakeSubsystem;
+import frc.robot.subsystems.spindexerSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -28,10 +33,13 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ShooterPrototype mShooterPrototype = new ShooterPrototype();
   private final IntakeSubsystem mIntakeSubsystem = new IntakeSubsystem();
+  private final UptakeSubsystem mUptakeSubsystem = new UptakeSubsystem();
+  private final spindexerSubsystem mSpindexerSubsystem = new spindexerSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driver =
       new CommandXboxController(OperatorConstants.driverController);
+  private final CommandXboxController operator = new CommandXboxController(OperatorConstants.operatorController);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,9 +67,19 @@ public class RobotContainer {
     driver.rightBumper().whileTrue(new AimManualControl(mShooterPrototype, .1));
     driver.leftBumper().whileTrue(new AimManualControl(mShooterPrototype, -.1));
 
+    //Uptake Controls
+    driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, 15));
+    driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -15));
+
     //Intake Controls
-    driver.y().whileTrue(new IntakeControl(mIntakeSubsystem, .9));
-    driver.a().whileTrue(new IntakeControl(mIntakeSubsystem, -.9));
+    operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, .9));
+    operator.a().whileTrue(new IntakeControl(mIntakeSubsystem, -.9));
+
+    //Spindexer Controls
+    operator.rightBumper().whileTrue(new ControlSpindexerExit(mSpindexerSubsystem, 1));
+    operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerSubsystem, -1));
+    operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, .2));
+    operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -.2));
 
   }
 
