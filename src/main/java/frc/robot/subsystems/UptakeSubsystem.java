@@ -44,17 +44,17 @@ public class UptakeSubsystem extends SubsystemBase {
   public static void uptakeConfiguration() {
     uptakeMotor.setNeutralMode(NeutralModeValue.Coast);
 
-    uptakeConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 1;
+    uptakeConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.1;
 
     uptakeConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     uptakeConfig.CurrentLimits.StatorCurrentLimit = 40;
 
-    uptakeConfig.Slot0.kV = 0.01;
+    uptakeConfig.Slot0.kV = 0.00;
 
     uptakeConfig.Slot0.kP = 0.02;
-    uptakeConfig.Slot0.kI = 0.005;
-    uptakeConfig.Slot0.kD = 0.0005;
+    uptakeConfig.Slot0.kI = 0.0;//0.005
+    uptakeConfig.Slot0.kD = 0.0;
 
     uptakeMotor.getConfigurator().apply(uptakeConfig);
   }
