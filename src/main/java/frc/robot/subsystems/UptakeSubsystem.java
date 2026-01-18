@@ -27,7 +27,11 @@ public class UptakeSubsystem extends SubsystemBase {
   }
 
   public static void uptakeWithVelocity(double speed) {
-    uptakeMotor.setControl(uptakVelocityDutyCycle.withVelocity(speed));
+    if (speed != 0) {
+      uptakeMotor.setControl(uptakVelocityDutyCycle.withVelocity(speed));
+    } else {
+      uptakeMotor.set(speed);
+    }
   }
 
   @Override
@@ -40,15 +44,17 @@ public class UptakeSubsystem extends SubsystemBase {
   public static void uptakeConfiguration() {
     uptakeMotor.setNeutralMode(NeutralModeValue.Coast);
 
+    uptakeConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 1;
+
     uptakeConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     uptakeConfig.CurrentLimits.StatorCurrentLimit = 40;
 
     uptakeConfig.Slot0.kV = 0.01;
-    uptakeConfig.Slot0.kS = 0;
-    uptakeConfig.Slot0.kA = 0;
 
-    uptakeConfig.Slot0.kP = 0.01;
+    uptakeConfig.Slot0.kP = 0.02;
+    uptakeConfig.Slot0.kI = 0.005;
+    uptakeConfig.Slot0.kD = 0.0005;
 
     uptakeMotor.getConfigurator().apply(uptakeConfig);
   }

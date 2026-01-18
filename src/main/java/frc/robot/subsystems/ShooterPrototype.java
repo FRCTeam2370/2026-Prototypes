@@ -34,8 +34,13 @@ public class ShooterPrototype extends SubsystemBase {
   }
 
   public static void shootWithVelocity(double speed) {
-    shooterMotorOne.setControl(shooterVelocityDutyCycle.withVelocity(speed));
-    shooterMotorTwo.setControl(shooterVelocityDutyCycle.withVelocity(speed));
+    if (speed != 0) {
+      shooterMotorOne.setControl(shooterVelocityDutyCycle.withVelocity(speed));
+      shooterMotorTwo.setControl(shooterVelocityDutyCycle.withVelocity(speed));
+    } else {
+      shooterMotorOne.set(speed);
+      shooterMotorTwo.set(speed);
+    }
   }
 
   public static void shootPrototype(double speed) {
@@ -76,12 +81,13 @@ public class ShooterPrototype extends SubsystemBase {
 
     shooterMotorOneConfig.Slot0.kV = 0.01;
     shooterMotorTwoConfig.Slot0.kV = 0.01;
-    shooterMotorOneConfig.Slot0.kS = 0;
-    shooterMotorTwoConfig.Slot0.kS = 0;
-    shooterMotorOneConfig.Slot0.kA = 0;
-    shooterMotorTwoConfig.Slot0.kA = 0;
 
-    shooterAimMotorConfig.Slot0.kP = 0.01;
+    shooterMotorOneConfig.Slot0.kP = 0.03;
+    shooterMotorTwoConfig.Slot0.kP = 0.03;
+    shooterMotorOneConfig.Slot0.kI = 0.01;
+    shooterMotorTwoConfig.Slot0.kI = 0.01;
+
+    shooterAimMotorConfig.Slot0.kP = 0.05;
     shooterAimMotorConfig.Slot0.kI = 0;
     shooterAimMotorConfig.Slot0.kD = 0;
 

@@ -64,8 +64,8 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     //Shooter Controls
-    driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 40));
-    driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -40));
+    driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 65));
+    driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -65));
     driver.rightBumper().whileTrue(new AimManualControl(mShooterPrototype, .1));
     driver.leftBumper().whileTrue(new AimManualControl(mShooterPrototype, -.1));
 
