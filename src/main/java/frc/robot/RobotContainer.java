@@ -16,6 +16,7 @@ import frc.robot.commands.controlSpindexer;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterPrototype;
+import frc.robot.subsystems.SpindexerExitSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
 import frc.robot.subsystems.spindexerSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,6 +36,7 @@ public class RobotContainer {
   private final IntakeSubsystem mIntakeSubsystem = new IntakeSubsystem();
   private final UptakeSubsystem mUptakeSubsystem = new UptakeSubsystem();
   private final spindexerSubsystem mSpindexerSubsystem = new spindexerSubsystem();
+  private final SpindexerExitSubsystem mSpindexerExitSubsystem = new SpindexerExitSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driver =
@@ -62,24 +64,24 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     //Shooter Controls
-    driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 30));
-    driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -30));
+    driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 40));
+    driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -40));
     driver.rightBumper().whileTrue(new AimManualControl(mShooterPrototype, .1));
     driver.leftBumper().whileTrue(new AimManualControl(mShooterPrototype, -.1));
 
     //Uptake Controls
-    driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, 15));
-    driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -15));
+    driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, 50));
+    driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -50));
 
     //Intake Controls
     operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, .9));
     operator.a().whileTrue(new IntakeControl(mIntakeSubsystem, -.9));
 
     //Spindexer Controls
-    operator.rightBumper().whileTrue(new ControlSpindexerExit(mSpindexerSubsystem, 1));
-    operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerSubsystem, -1));
-    operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, .2));
-    operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -.2));
+    operator.rightBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, 1));
+    operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, -1));
+    operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, .3));
+    operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -.3));
 
   }
 

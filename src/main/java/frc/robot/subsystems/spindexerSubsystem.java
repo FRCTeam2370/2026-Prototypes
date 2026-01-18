@@ -14,18 +14,12 @@ import frc.robot.Constants;
 
 public class spindexerSubsystem extends SubsystemBase {
   public static TalonFX spindexerMotor = new TalonFX(Constants.spindexerConstants.spindexerMotorID);
-  public static TalonFX spindexerExitMotor = new TalonFX(Constants.spindexerConstants.spindexerExitMotorID);
 
   public static TalonFXConfiguration spindexerMotorConfig = new TalonFXConfiguration();
-  public static TalonFXConfiguration spindexerExitMotorConfig = new TalonFXConfiguration();
 
   /** Creates a new spindexerSubsystem. */
   public spindexerSubsystem() {
     spindexerConfiguration();
-  }
-  
-  public static void controlSpindexerExit(double speed) {
-    spindexerExitMotor.set(speed);
   }
 
   public static void controlSpindexer(double speed){
@@ -39,12 +33,9 @@ public class spindexerSubsystem extends SubsystemBase {
 
   public static void spindexerConfiguration() {
     spindexerMotor.setNeutralMode(NeutralModeValue.Coast);
-    spindexerExitMotor.setNeutralMode(NeutralModeValue.Coast);
 
     spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-    spindexerExitMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     spindexerMotor.getConfigurator().apply(spindexerMotorConfig);
-    spindexerExitMotor.getConfigurator().apply(spindexerExitMotorConfig);
   }
 }

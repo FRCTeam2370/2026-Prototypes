@@ -34,12 +34,15 @@ public class UptakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Uptake Velocity", uptakeMotor.getVelocity().getValueAsDouble());
+    SmartDashboard.putNumber("Uptake Amps", uptakeMotor.getStatorCurrent().getValueAsDouble());
   }
 
   public static void uptakeConfiguration() {
     uptakeMotor.setNeutralMode(NeutralModeValue.Coast);
 
-    uptakeConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    uptakeConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+
+    uptakeConfig.CurrentLimits.StatorCurrentLimit = 40;
 
     uptakeConfig.Slot0.kV = 0.01;
     uptakeConfig.Slot0.kS = 0;
