@@ -37,12 +37,14 @@ public class spindexerSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Spindexer  Motor Current", spindexerMotor.getStatorCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("Spindexer Velocity", spindexerMotor.getVelocity().getValueAsDouble());
   }
 
   public static void spindexerConfiguration() {
     spindexerMotor.setNeutralMode(NeutralModeValue.Coast);
 
-    spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; 
+    spindexerMotorConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.2;
 
     spindexerMotorConfig.Slot0.kV = 0.01;
 

@@ -46,6 +46,6 @@ public final class Constants {
     public static final int spindexerExitMotorID = 6;
 
     public static int spindexerExitSpeed = 100;
-    public static int spindexerSpeed = 30;
+    public static int spindexerSpeed = 105;
   }
 }

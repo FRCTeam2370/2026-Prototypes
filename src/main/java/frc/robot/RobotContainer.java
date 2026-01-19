@@ -13,7 +13,6 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Intake.IntakeControl;
 import frc.robot.commands.Shooter.AimManualControl;
-import frc.robot.commands.Shooter.ControlShooterRotate;
 import frc.robot.commands.Shooter.ShootShooter;
 import frc.robot.commands.Shooter.ShooterRotatePos;
 import frc.robot.commands.Spindexer.ControlSpindexerExit;
