@@ -9,18 +9,21 @@ import frc.robot.Constants.intakeConstants;
 import frc.robot.Constants.shooterConstants;
 import frc.robot.Constants.spindexerConstants;
 import frc.robot.Constants.uptakeConstants;
-import frc.robot.commands.AimManualControl;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ControlSpindexerExit;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.IntakeControl;
-import frc.robot.commands.ShootShooter;
-import frc.robot.commands.UptakeFuel;
-import frc.robot.commands.controlSpindexer;
+import frc.robot.commands.Intake.IntakeControl;
+import frc.robot.commands.Shooter.AimManualControl;
+import frc.robot.commands.Shooter.ControlShooterRotate;
+import frc.robot.commands.Shooter.ShootShooter;
+import frc.robot.commands.Shooter.ShooterRotatePos;
+import frc.robot.commands.Spindexer.ControlSpindexerExit;
+import frc.robot.commands.Spindexer.controlSpindexer;
+import frc.robot.commands.Uptake.UptakeFuel;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterAimSubsystem;
 import frc.robot.subsystems.ShooterPrototype;
+import frc.robot.subsystems.ShooterRotateSubsystem;
 import frc.robot.subsystems.SpindexerExitSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
 import frc.robot.subsystems.spindexerSubsystem;
@@ -43,6 +46,7 @@ public class RobotContainer {
   private final spindexerSubsystem mSpindexerSubsystem = new spindexerSubsystem();
   private final SpindexerExitSubsystem mSpindexerExitSubsystem = new SpindexerExitSubsystem();
   private final ShooterAimSubsystem mShooterAimSubsystem = new ShooterAimSubsystem();
+  private final ShooterRotateSubsystem mShooterRotateSubsystem = new ShooterRotateSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driver =
@@ -74,6 +78,8 @@ public class RobotContainer {
     driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -shooterConstants.shooterSpeed));
     driver.rightBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
     driver.leftBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
+    driver.x().whileTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
+    driver.b().whileTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
 
     //Uptake Controls
     driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
