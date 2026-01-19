@@ -22,18 +22,28 @@ public final class Constants {
     public static final int shooterMotorOneID = 0;
     public static final int shooterMotorTwoID = 1;
     public static final int shooterAimMotorID = 2;
+
+    public static final int shooterSpeed = 65;
+    public static final int shooterAimSpeed = 1;
   }
 
   public static class intakeConstants{
     public static final int intakeMotorID = 3;
+
+    public static final int intakeSpeed = 90;
   }
 
   public static class uptakeConstants{
     public static final int uptakeMotorID = 4;
+
+    public static final int uptakeSpeed = 50;
   }
 
   public static class spindexerConstants{
     public static final int spindexerMotorID = 5;
     public static final int spindexerExitMotorID = 6;
+
+    public static int spindexerExitSpeed = 100;
+    public static int spindexerSpeed = 30;
   }
 }

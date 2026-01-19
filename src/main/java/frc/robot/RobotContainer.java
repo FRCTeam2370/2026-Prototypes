@@ -5,6 +5,10 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.intakeConstants;
+import frc.robot.Constants.shooterConstants;
+import frc.robot.Constants.spindexerConstants;
+import frc.robot.Constants.uptakeConstants;
 import frc.robot.commands.AimManualControl;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ControlSpindexerExit;
@@ -15,6 +19,7 @@ import frc.robot.commands.UptakeFuel;
 import frc.robot.commands.controlSpindexer;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterAimSubsystem;
 import frc.robot.subsystems.ShooterPrototype;
 import frc.robot.subsystems.SpindexerExitSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
@@ -37,6 +42,7 @@ public class RobotContainer {
   private final UptakeSubsystem mUptakeSubsystem = new UptakeSubsystem();
   private final spindexerSubsystem mSpindexerSubsystem = new spindexerSubsystem();
   private final SpindexerExitSubsystem mSpindexerExitSubsystem = new SpindexerExitSubsystem();
+  private final ShooterAimSubsystem mShooterAimSubsystem = new ShooterAimSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driver =
@@ -64,24 +70,24 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     //Shooter Controls
-    driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 65));
-    driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -65));
-    driver.rightBumper().whileTrue(new AimManualControl(mShooterPrototype, .1));
-    driver.leftBumper().whileTrue(new AimManualControl(mShooterPrototype, -.1));
+    driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, shooterConstants.shooterSpeed));
+    driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -shooterConstants.shooterSpeed));
+    driver.rightBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
+    driver.leftBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
 
     //Uptake Controls
-    driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, 50));
-    driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -50));
+    driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
+    driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -uptakeConstants.uptakeSpeed));
 
     //Intake Controls
-    operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, .9));
-    operator.a().whileTrue(new IntakeControl(mIntakeSubsystem, -.9));
+    operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, intakeConstants.intakeSpeed));
+    operator.a().whileTrue(new IntakeControl(mIntakeSubsystem, -intakeConstants.intakeSpeed));
 
     //Spindexer Controls
-    operator.rightBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, 1));
-    operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, -1));
-    operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, .3));
-    operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -.3));
+    operator.rightBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, spindexerConstants.spindexerExitSpeed));
+    operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, -spindexerConstants.spindexerExitSpeed));
+    operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, spindexerConstants.spindexerSpeed));
+    operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -spindexerConstants.spindexerSpeed));
 
   }
 

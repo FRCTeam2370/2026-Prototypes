@@ -12,10 +12,10 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.uptakeConstants;
 
 public class UptakeSubsystem extends SubsystemBase {
-  public static TalonFX uptakeMotor = new TalonFX(Constants.uptakeConstants.uptakeMotorID);
+  public static TalonFX uptakeMotor = new TalonFX(uptakeConstants.uptakeMotorID);
 
   public static TalonFXConfiguration uptakeConfig = new TalonFXConfiguration();
 

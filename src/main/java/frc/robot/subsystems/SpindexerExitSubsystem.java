@@ -5,24 +5,33 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.spindexerConstants;
 
 public class SpindexerExitSubsystem extends SubsystemBase {
   /** Creates a new SpindexerExitSubsystem. */
-  public static TalonFX spindexerExitMotor = new TalonFX(Constants.spindexerConstants.spindexerExitMotorID);
+  public static TalonFX spindexerExitMotor = new TalonFX(spindexerConstants.spindexerExitMotorID);
 
   public static TalonFXConfiguration spindexerExitMotorConfig = new TalonFXConfiguration();
+  
+  public static VelocityDutyCycle spindexerExiDutyCycle = new VelocityDutyCycle(0);
 
-  public SpindexerExitSubsystem() {}
+  public SpindexerExitSubsystem() {
+    spindexerExitConfiguration();
+  }
 
-  public static void controlSpindexerExit(double speed) {
-    spindexerExitMotor.set(speed);
+  public static void exitWithVelocity(double speed) {
+    if (speed != 0) {
+      spindexerExitMotor.setControl(spindexerExiDutyCycle.withVelocity(speed));
+    } else {
+      spindexerExitMotor.set(speed);
+    }
   }
 
   @Override
@@ -35,6 +44,12 @@ public class SpindexerExitSubsystem extends SubsystemBase {
     spindexerExitMotor.setNeutralMode(NeutralModeValue.Coast);
 
     spindexerExitMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+
+    spindexerExitMotorConfig.Slot0.kV = 0.01;
+
+    spindexerExitMotorConfig.Slot0.kP = 0.01;
+    spindexerExitMotorConfig.Slot0.kI = 0;
+    spindexerExitMotorConfig.Slot0.kD = 0;
 
     spindexerExitMotor.getConfigurator().apply(spindexerExitMotorConfig);
   }

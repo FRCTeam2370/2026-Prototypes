@@ -5,28 +5,34 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.spindexerConstants;
 
 public class spindexerSubsystem extends SubsystemBase {
-  public static TalonFX spindexerMotor = new TalonFX(Constants.spindexerConstants.spindexerMotorID);
+  public static TalonFX spindexerMotor = new TalonFX(spindexerConstants.spindexerMotorID);
 
   public static TalonFXConfiguration spindexerMotorConfig = new TalonFXConfiguration();
+
+  public static VelocityDutyCycle spindexerVelocityDutyCycle = new VelocityDutyCycle(0);
 
   /** Creates a new spindexerSubsystem. */
   public spindexerSubsystem() {
     spindexerConfiguration();
   }
 
-  public static void controlSpindexer(double speed){
-    spindexerMotor.set(speed);
+  public static void spindexrWithVelocity(double speed) {
+    if (speed != 0) {
+      spindexerMotor.setControl(spindexerVelocityDutyCycle.withVelocity(speed));
+    } else {
+      spindexerMotor.set(speed);
+    }
   }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -37,6 +43,12 @@ public class spindexerSubsystem extends SubsystemBase {
     spindexerMotor.setNeutralMode(NeutralModeValue.Coast);
 
     spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+
+    spindexerMotorConfig.Slot0.kV = 0.01;
+
+    spindexerMotorConfig.Slot0.kP = 0.01;
+    spindexerMotorConfig.Slot0.kI = 0;
+    spindexerMotorConfig.Slot0.kD = 0;
 
     spindexerMotor.getConfigurator().apply(spindexerMotorConfig);
   }

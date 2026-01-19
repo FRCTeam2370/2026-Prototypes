@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -13,20 +12,17 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.shooterConstants;
 
 public class ShooterPrototype extends SubsystemBase {
 
-  public static TalonFX shooterMotorOne = new TalonFX(Constants.shooterConstants.shooterMotorOneID);
-  public static TalonFX shooterMotorTwo = new TalonFX(Constants.shooterConstants.shooterMotorTwoID);
-  public static TalonFX shooterAimMotor = new TalonFX(Constants.shooterConstants.shooterAimMotorID);
+  public static TalonFX shooterMotorOne = new TalonFX(shooterConstants.shooterMotorOneID);
+  public static TalonFX shooterMotorTwo = new TalonFX(shooterConstants.shooterMotorTwoID);
 
   public static TalonFXConfiguration shooterMotorOneConfig = new TalonFXConfiguration();
   public static TalonFXConfiguration shooterMotorTwoConfig = new TalonFXConfiguration();
-  public static TalonFXConfiguration shooterAimMotorConfig = new TalonFXConfiguration();
 
   public static VelocityDutyCycle shooterVelocityDutyCycle = new VelocityDutyCycle(0);
-  public static PositionDutyCycle shooterAimDutyCycle = new PositionDutyCycle(0);
 
   /** Creates a new ShooterPrototype. */
   public ShooterPrototype() {
@@ -48,36 +44,19 @@ public class ShooterPrototype extends SubsystemBase {
     shooterMotorTwo.set(speed);
   }
 
-  public static void shooterAim(double position) {
-    shooterAimMotor.setControl(shooterAimDutyCycle.withPosition(position));
-  }
-
-  public static void shooterManualAim(double speed) {
-    shooterAimMotor.set(speed);
-  }
-
-  public static void shooterAimZero() {
-    while (shooterAimMotor.getStatorCurrent().getValueAsDouble() < 20) {
-      shooterManualAim(.10);
-    }
-  }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Motor One Velocity", shooterMotorOne.getVelocity().getValueAsDouble());
     SmartDashboard.putNumber("Motor Two Velocity", shooterMotorTwo.getVelocity().getValueAsDouble());
-    SmartDashboard.putNumber("Shooter Aim Motor Current", shooterAimMotor.getStatorCurrent().getValueAsDouble());
   }
 
   public static void shooterMotorConfig() {
     shooterMotorOne.setNeutralMode(NeutralModeValue.Coast);
     shooterMotorTwo.setNeutralMode(NeutralModeValue.Coast);
-    shooterAimMotor.setNeutralMode(NeutralModeValue.Brake);
 
     shooterMotorOneConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     shooterMotorTwoConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-    shooterAimMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
     shooterMotorOneConfig.Slot0.kV = 0.01;
     shooterMotorTwoConfig.Slot0.kV = 0.01;
@@ -87,12 +66,7 @@ public class ShooterPrototype extends SubsystemBase {
     shooterMotorOneConfig.Slot0.kI = 0.01;
     shooterMotorTwoConfig.Slot0.kI = 0.01;
 
-    shooterAimMotorConfig.Slot0.kP = 0.05;
-    shooterAimMotorConfig.Slot0.kI = 0;
-    shooterAimMotorConfig.Slot0.kD = 0;
-
     shooterMotorOne.getConfigurator().apply(shooterMotorOneConfig);
     shooterMotorTwo.getConfigurator().apply(shooterMotorTwoConfig);
-    shooterAimMotor.getConfigurator().apply(shooterAimMotorConfig);
   }
 }
