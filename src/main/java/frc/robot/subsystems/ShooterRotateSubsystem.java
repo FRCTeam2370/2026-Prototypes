@@ -49,11 +49,11 @@ public class ShooterRotateSubsystem extends SubsystemBase {
 
     shooterRotateConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
-    shooterRotateConfig.Slot0.kP = 0.13;
-    shooterRotateConfig.Slot0.kI = 0.07;
-    shooterRotateConfig.Slot0.kD = 0.004;
+    shooterRotateConfig.Slot0.kP = 0.31;
+    shooterRotateConfig.Slot0.kI = 0.02;
+    shooterRotateConfig.Slot0.kD = 0.015;
 
-    shooterRotateConfig.MotionMagic.MotionMagicAcceleration = 120;
+    shooterRotateConfig.MotionMagic.MotionMagicAcceleration = 100;
     shooterRotateConfig.MotionMagic.MotionMagicCruiseVelocity = 60;
 
     shooterRotateMotor.getConfigurator().apply(shooterRotateConfig);

@@ -78,8 +78,9 @@ public class RobotContainer {
     driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -shooterConstants.shooterSpeed));
     driver.rightBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
     driver.leftBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
-    driver.x().whileTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
-    driver.b().whileTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
+    driver.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
+    driver.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
+    driver.povUp().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 1.7));
 
     //Uptake Controls
     driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
