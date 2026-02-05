@@ -75,15 +75,16 @@ public class RobotContainer {
     //Shooter Controls
     driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, shooterConstants.shooterSpeed));
     driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -shooterConstants.shooterSpeed));
-    driver.rightBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
-    driver.leftBumper().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
+    driver.rightBumper().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
+    driver.y().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
+    driver.a().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
     driver.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
     driver.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
     driver.povUp().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 1.7));
 
     //Uptake Controls
-    driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
-    driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -uptakeConstants.uptakeSpeed));
+    //driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
+    //driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -uptakeConstants.uptakeSpeed));
 
     //Intake Controls
     operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, intakeConstants.intakeSpeed));
