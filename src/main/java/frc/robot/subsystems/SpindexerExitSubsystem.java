@@ -34,16 +34,23 @@ public class SpindexerExitSubsystem extends SubsystemBase {
     }
   }
 
+  public static void exitWithoutVelocity(double speed) {
+    spindexerExitMotor.set(speed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Spindexer Exit Motor Current", spindexerExitMotor.getStatorCurrent().getValueAsDouble());
+    SmartDashboard.putNumber("Spindexer Exit Velocity", spindexerExitMotor.getVelocity().getValueAsDouble());
   }
 
   public static void spindexerExitConfiguration() {
     spindexerExitMotor.setNeutralMode(NeutralModeValue.Coast);
 
-    spindexerExitMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    spindexerExitMotorConfig.CurrentLimits.StatorCurrentLimit = 40;
+
+    spindexerExitMotorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     spindexerExitMotorConfig.Slot0.kV = 0.01;
 

@@ -26,13 +26,13 @@ public class ControlSpindexerExit extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SpindexerExitSubsystem.exitWithVelocity(speed);
+    SpindexerExitSubsystem.exitWithoutVelocity(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SpindexerExitSubsystem.exitWithVelocity(0);
+    SpindexerExitSubsystem.exitWithoutVelocity(0);
   }
 
   // Returns true when the command should end.

@@ -25,13 +25,13 @@ public class controlSpindexer extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    spindexerSubsystem.spindexrWithVelocity(speed);
+    spindexerSubsystem.spindexerWithoutVelocity(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    spindexerSubsystem.spindexrWithVelocity(0);
+    spindexerSubsystem.spindexerWithoutVelocity(0);
   }
 
   // Returns true when the command should end.

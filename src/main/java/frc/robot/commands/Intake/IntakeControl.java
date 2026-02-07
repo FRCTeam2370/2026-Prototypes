@@ -25,13 +25,13 @@ public class IntakeControl extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    IntakeSubsystem.intakeWithVelocity(speed);
+    IntakeSubsystem.intakeWithoutVelocity(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    IntakeSubsystem.intakeWithVelocity(0);
+    IntakeSubsystem.intakeWithoutVelocity(0);
   }
 
   // Returns true when the command should end.

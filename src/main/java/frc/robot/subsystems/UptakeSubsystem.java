@@ -34,6 +34,10 @@ public class UptakeSubsystem extends SubsystemBase {
     }
   }
 
+  public static void uptakeWithoutVelocity(double speed) {
+    uptakeMotor.set(speed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
