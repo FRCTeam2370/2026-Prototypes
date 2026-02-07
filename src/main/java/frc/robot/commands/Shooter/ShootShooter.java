@@ -25,7 +25,8 @@ public class ShootShooter extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ShooterPrototype.shootPrototype(speed);
+    // ShooterPrototype.shootPrototype(speed);
+    ShooterPrototype.shootWithVelocity(speed);
   }
 
   // Called once the command ends or is interrupted.

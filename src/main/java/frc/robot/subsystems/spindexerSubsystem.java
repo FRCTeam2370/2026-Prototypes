@@ -50,7 +50,7 @@ public class spindexerSubsystem extends SubsystemBase {
 
     spindexerMotorConfig.CurrentLimits.StatorCurrentLimit = 40;
 
-    spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; 
+    spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive; 
     // spindexerMotorConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.2;
 
     // spindexerMotorConfig.Slot0.kV = 0.01;

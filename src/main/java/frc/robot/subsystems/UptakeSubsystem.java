@@ -41,8 +41,8 @@ public class UptakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Uptake Current", uptakeMotor.getStatorCurrent().getValueAsDouble());
     SmartDashboard.putNumber("Uptake Velocity", uptakeMotor.getVelocity().getValueAsDouble());
-    SmartDashboard.putNumber("Uptake Amps", uptakeMotor.getStatorCurrent().getValueAsDouble());
   }
 
   public static void uptakeConfiguration() {
@@ -50,14 +50,14 @@ public class UptakeSubsystem extends SubsystemBase {
 
     uptakeConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.1;
 
-    uptakeConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    uptakeConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
     uptakeConfig.CurrentLimits.StatorCurrentLimit = 40;
 
-    uptakeConfig.Slot0.kV = 0.00;
+    uptakeConfig.Slot0.kV = 0.01;
 
     uptakeConfig.Slot0.kP = 0.05;
-    uptakeConfig.Slot0.kI = 0.0;//0.005
+    uptakeConfig.Slot0.kI = 0.0;
     uptakeConfig.Slot0.kD = 0.0;
 
     uptakeMotor.getConfigurator().apply(uptakeConfig);

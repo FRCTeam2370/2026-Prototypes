@@ -13,6 +13,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Intake.IntakeControl;
 import frc.robot.commands.Shooter.AimManualControl;
+import frc.robot.commands.Shooter.ControlShooterRotate;
 import frc.robot.commands.Shooter.ShootShooter;
 import frc.robot.commands.Shooter.ShooterRotatePos;
 import frc.robot.commands.Spindexer.ControlSpindexerExit;
@@ -75,16 +76,19 @@ public class RobotContainer {
     //Shooter Controls
     driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, shooterConstants.shooterSpeed));
     driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -shooterConstants.shooterSpeed));
-    driver.rightBumper().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
     driver.y().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
     driver.a().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
-    driver.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
-    driver.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
-    driver.povUp().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 1.7));
 
     //Uptake Controls
-    //driver.y().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
-    //driver.a().whileTrue(new UptakeFuel(mUptakeSubsystem, -uptakeConstants.uptakeSpeed));
+    driver.rightBumper().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
+    driver.leftBumper().whileTrue(new UptakeFuel(mUptakeSubsystem, -uptakeConstants.uptakeSpeed));
+
+    //Shooter Rotation Controls
+    driver.x().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, shooterConstants.shooterRotateSpeed));
+    driver.x().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, -shooterConstants.shooterRotateSpeed));
+    // driver.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
+    // driver.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
+    // driver.povUp().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 1.7));
 
     //Intake Controls
     operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, intakeConstants.intakeSpeed));

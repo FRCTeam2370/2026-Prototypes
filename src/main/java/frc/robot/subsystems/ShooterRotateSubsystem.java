@@ -39,6 +39,7 @@ public class ShooterRotateSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Shooter Rotation Pos", shooterRotateMotor.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("Shooter Rotate Motor Current", shooterRotateMotor.getStatorCurrent().getValueAsDouble());
   }
 
   public static void shooterRotateConfiguration() {
