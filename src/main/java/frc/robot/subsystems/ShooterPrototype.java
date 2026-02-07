@@ -66,8 +66,8 @@ public class ShooterPrototype extends SubsystemBase {
     shooterMotorOneConfig.Slot0.kV = 0.01;
     shooterMotorTwoConfig.Slot0.kV = 0.01;
 
-    shooterMotorOneConfig.Slot0.kP = 0.085;
-    shooterMotorTwoConfig.Slot0.kP = 0.085;
+    shooterMotorOneConfig.Slot0.kP = 0.1;
+    shooterMotorTwoConfig.Slot0.kP = 0.1;
     shooterMotorOneConfig.Slot0.kI = 0;
     shooterMotorTwoConfig.Slot0.kI = 0;
     shooterMotorOneConfig.Slot0.kD = 0;

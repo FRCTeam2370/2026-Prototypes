@@ -56,7 +56,7 @@ public class UptakeSubsystem extends SubsystemBase {
 
     uptakeConfig.Slot0.kV = 0.01;
 
-    uptakeConfig.Slot0.kP = 0.05;
+    uptakeConfig.Slot0.kP = 0.25;
     uptakeConfig.Slot0.kI = 0.0;
     uptakeConfig.Slot0.kD = 0.0;
 
