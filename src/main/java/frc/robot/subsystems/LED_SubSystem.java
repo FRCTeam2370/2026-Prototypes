@@ -33,8 +33,8 @@ public class LED_SubSystem extends SubsystemBase {
     }
 
   public static void targetingAnim() {
-    output1.set(true);
-    output2.set(false);
+    output1.set(true);  
+    output2.set(false); 
     output3.set(false);
   }
 
