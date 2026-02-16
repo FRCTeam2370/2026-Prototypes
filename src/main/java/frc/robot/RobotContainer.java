@@ -15,6 +15,7 @@ import frc.robot.commands.Intake.IntakeControl;
 import frc.robot.commands.Shooter.AimManualControl;
 import frc.robot.commands.Shooter.ControlShooterRotate;
 import frc.robot.commands.Shooter.ShootShooter;
+import frc.robot.commands.Shooter.ShooterElevationPos;
 import frc.robot.commands.Shooter.ShooterRotatePos;
 import frc.robot.commands.Spindexer.ControlSpindexerExit;
 import frc.robot.commands.Spindexer.controlSpindexer;
@@ -49,9 +50,9 @@ public class RobotContainer {
   private final ShooterRotateSubsystem mShooterRotateSubsystem = new ShooterRotateSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController driver =
-      new CommandXboxController(OperatorConstants.driverController);
+  private final CommandXboxController driver = new CommandXboxController(OperatorConstants.driverController);
   private final CommandXboxController operator = new CommandXboxController(OperatorConstants.operatorController);
+  private final CommandXboxController testing = new CommandXboxController( 3);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -99,6 +100,17 @@ public class RobotContainer {
     operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, -spindexerConstants.spindexerExitSpeed));
     operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, spindexerConstants.spindexerSpeed));
     operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -spindexerConstants.spindexerSpeed));
+
+    //Testing
+    // testing.a().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0.001));
+    // testing.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2));
+    // testing.y().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2.25));
+    // testing.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 9));
+
+    testing.a().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 0.01));
+    testing.x().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 1.375));
+    testing.y().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 2.75));
+    testing.b().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 5.5));
 
   }
 
