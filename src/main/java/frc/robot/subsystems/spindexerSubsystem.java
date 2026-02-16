@@ -53,11 +53,10 @@ public class spindexerSubsystem extends SubsystemBase {
     spindexerMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive; 
     // spindexerMotorConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = 0.2;
 
-    // spindexerMotorConfig.Slot0.kV = 0.01;
-
-    // spindexerMotorConfig.Slot0.kP = 0.01;
-    // spindexerMotorConfig.Slot0.kI = 0;
-    // spindexerMotorConfig.Slot0.kD = 0;
+    spindexerMotorConfig.Slot0.kV = 0.01;
+    spindexerMotorConfig.Slot0.kP = 0.01;
+    spindexerMotorConfig.Slot0.kI = 0;
+    spindexerMotorConfig.Slot0.kD = 0;
 
     spindexerMotor.getConfigurator().apply(spindexerMotorConfig);
   }

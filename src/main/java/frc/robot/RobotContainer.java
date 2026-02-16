@@ -102,15 +102,15 @@ public class RobotContainer {
     operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -spindexerConstants.spindexerSpeed));
 
     //Testing
-    // testing.a().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0.001));
-    // testing.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2));
-    // testing.y().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2.25));
-    // testing.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 9));
+    testing.a().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0.001));
+    testing.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2));
+    testing.y().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2.25));
+    testing.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 9));
 
-    testing.a().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 0.01));
-    testing.x().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 1.375));
-    testing.y().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 2.75));
-    testing.b().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 5.5));
+    // testing.a().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 0.01));
+    // testing.x().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 1.375));
+    // testing.y().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 2.75));
+    // testing.b().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 5.5));
 
   }
 
