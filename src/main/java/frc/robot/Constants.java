@@ -24,15 +24,16 @@ public final class Constants {
     public static final int shooterAimMotorID = 2;
     public static final int shooterRotateMotorID = 7;
 
-    public static final int shooterSpeed = 25;
-    public static final double shooterAimSpeed = 1;
-    public static final double shooterRotateSpeed = .05;
+    public static final int shooterSpeed = 40;
+    public static final double shooterAimSpeed = .05;
+    public static final double shooterRotateSpeed = .1;
   }
 
   public static class intakeConstants{
     public static final int intakeMotorID = 3;
+    public static final int intakeRotationMotorID = 8;
 
-    public static final double intakeSpeed = .9;
+    public static final double intakeSpeed = .7;
   }
 
   public static class uptakeConstants{
@@ -46,6 +47,6 @@ public final class Constants {
     public static final int spindexerExitMotorID  = 6;
 
     public static int spindexerExitSpeed = 1;
-    public static double spindexerSpeed = .7;
+    public static double spindexerSpeed = 1;
   }
 }

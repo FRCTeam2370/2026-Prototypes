@@ -85,7 +85,7 @@ public class RobotContainer {
 
     //Shooter Rotation Controls
     driver.x().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, shooterConstants.shooterRotateSpeed));
-    driver.x().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, -shooterConstants.shooterRotateSpeed));
+    driver.b().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, -shooterConstants.shooterRotateSpeed));
     // driver.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
     // driver.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
     // driver.povUp().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 1.7));

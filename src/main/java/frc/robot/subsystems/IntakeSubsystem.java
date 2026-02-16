@@ -49,11 +49,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeMotorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
-    intakeMotorConfig.Slot0.kV = 0.01;
+    // intakeMotorConfig.Slot0.kV = 0.01;
 
-    intakeMotorConfig.Slot0.kP = 0.01;
-    intakeMotorConfig.Slot0.kI = 0;
-    intakeMotorConfig.Slot0.kD = 0;
+    // intakeMotorConfig.Slot0.kP = 0.01;
+    // intakeMotorConfig.Slot0.kI = 0;
+    // intakeMotorConfig.Slot0.kD = 0;
 
     intakeMotor.getConfigurator().apply(intakeMotorConfig);
   }
