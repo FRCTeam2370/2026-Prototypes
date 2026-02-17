@@ -4,33 +4,33 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.intakeConstants;
 import frc.robot.Constants.shooterConstants;
 import frc.robot.Constants.spindexerConstants;
 import frc.robot.Constants.uptakeConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Intake.IntakeControl;
+import frc.robot.commands.Intake.IntakeRotationControl;
 import frc.robot.commands.Shooter.AimManualControl;
 import frc.robot.commands.Shooter.ControlShooterRotate;
 import frc.robot.commands.Shooter.ShootShooter;
-import frc.robot.commands.Shooter.ShooterElevationPos;
-import frc.robot.commands.Shooter.ShooterRotatePos;
-import frc.robot.commands.Spindexer.ControlSpindexerExit;
 import frc.robot.commands.Spindexer.controlSpindexer;
+import frc.robot.commands.Swerve.ResetGyro;
+import frc.robot.commands.Swerve.TeleopSwerve;
 import frc.robot.commands.Uptake.UptakeFuel;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeRotSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterAimSubsystem;
 import frc.robot.subsystems.ShooterPrototype;
 import frc.robot.subsystems.ShooterRotateSubsystem;
-import frc.robot.subsystems.SpindexerExitSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
 import frc.robot.subsystems.spindexerSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,9 +45,10 @@ public class RobotContainer {
   private final IntakeSubsystem mIntakeSubsystem = new IntakeSubsystem();
   private final UptakeSubsystem mUptakeSubsystem = new UptakeSubsystem();
   private final spindexerSubsystem mSpindexerSubsystem = new spindexerSubsystem();
-  private final SpindexerExitSubsystem mSpindexerExitSubsystem = new SpindexerExitSubsystem();
   private final ShooterAimSubsystem mShooterAimSubsystem = new ShooterAimSubsystem();
   private final ShooterRotateSubsystem mShooterRotateSubsystem = new ShooterRotateSubsystem();
+  private final IntakeRotSubsystem mIntakeRotSubsystem = new IntakeRotSubsystem();
+  private final SwerveSubsystem mSwerveSubsystem = new SwerveSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController driver = new CommandXboxController(OperatorConstants.driverController);
@@ -70,9 +71,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    //Swerve
+    mSwerveSubsystem.setDefaultCommand(new TeleopSwerve(mSwerveSubsystem, ()->driver.getLeftX(), ()->driver.getLeftY(), ()->driver.getRightX(), ()-> false));
+    driver.rightStick().onTrue(new ResetGyro(mSwerveSubsystem));
 
     //Shooter Controls
     driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, shooterConstants.shooterSpeed));
@@ -96,21 +97,32 @@ public class RobotContainer {
     operator.a().whileTrue(new IntakeControl(mIntakeSubsystem, -intakeConstants.intakeSpeed));
 
     //Spindexer Controls
-    operator.rightBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, spindexerConstants.spindexerExitSpeed));
-    operator.leftBumper().whileTrue(new ControlSpindexerExit(mSpindexerExitSubsystem, -spindexerConstants.spindexerExitSpeed));
     operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, spindexerConstants.spindexerSpeed));
     operator.leftTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, -spindexerConstants.spindexerSpeed));
+    operator.rightBumper().whileTrue(new IntakeRotationControl(mIntakeRotSubsystem, intakeConstants.intakeRotationSpeed));
+    operator.leftBumper().whileTrue(new IntakeRotationControl(mIntakeRotSubsystem, -intakeConstants.intakeRotationSpeed));
 
     //Testing
-    testing.a().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0.001));
-    testing.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2));
-    testing.y().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2.25));
-    testing.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 9));
+    // testing.a().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0.001));
+    // testing.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2));
+    // testing.y().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 2.25));
+    // testing.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 9));
 
     // testing.a().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 0.01));
     // testing.x().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 1.375));
     // testing.y().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 2.75));
     // testing.b().onTrue(new ShooterElevationPos(mShooterAimSubsystem, 5.5));
+
+    //Do shooter speed 100-20 in incrememnts of 10. Yes it's annoying, deal with it :3
+    testing.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, 100));
+    testing.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, 90));
+    testing.rightBumper().whileTrue(new ShootShooter(mShooterPrototype, 80));
+    testing.leftBumper().whileTrue(new ShootShooter(mShooterPrototype, 70));
+    testing.x().whileTrue(new ShootShooter(mShooterPrototype, 60));
+    testing.y().whileTrue(new ShootShooter(mShooterPrototype, 50));
+    testing.b().whileTrue(new ShootShooter(mShooterPrototype, 40));
+    testing.a().whileTrue(new ShootShooter(mShooterPrototype, 30));
+    testing.povUp().whileTrue(new ShootShooter(mShooterPrototype, 20));
 
   }
 

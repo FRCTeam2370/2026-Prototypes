@@ -2,21 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Spindexer;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.SpindexerExitSubsystem;
-import frc.robot.subsystems.spindexerSubsystem;
+import frc.robot.subsystems.IntakeRotSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ControlSpindexerExit extends Command {
-  /** Creates a new ControlSpindexerExit. */
-  double speed;
-  public ControlSpindexerExit(SpindexerExitSubsystem mSpindexerExitSubsystem, double speed) {
+public class IntakeSetPosition extends Command {
+  /** Creates a new IntakeSetPosition. */
+  double position;
+  public IntakeSetPosition(IntakeRotSubsystem mIntakeRotSubsystem, double position) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.speed = speed;
+    this.position = position;
 
-    addRequirements(mSpindexerExitSubsystem);
+    addRequirements(mIntakeRotSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,14 +25,12 @@ public class ControlSpindexerExit extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SpindexerExitSubsystem.exitWithoutVelocity(speed);
+    IntakeRotSubsystem.intakeSetPoint(position);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    SpindexerExitSubsystem.exitWithoutVelocity(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
