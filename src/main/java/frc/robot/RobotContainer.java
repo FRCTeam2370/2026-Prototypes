@@ -12,7 +12,6 @@ import frc.robot.Constants.intakeConstants;
 import frc.robot.Constants.shooterConstants;
 import frc.robot.Constants.spindexerConstants;
 import frc.robot.Constants.uptakeConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.Intake.IntakeControl;
 import frc.robot.commands.Intake.IntakeRotationControl;
 import frc.robot.commands.Shooter.AimManualControl;
@@ -22,7 +21,6 @@ import frc.robot.commands.Spindexer.controlSpindexer;
 import frc.robot.commands.Swerve.ResetGyro;
 import frc.robot.commands.Swerve.TeleopSwerve;
 import frc.robot.commands.Uptake.UptakeFuel;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeRotSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterAimSubsystem;
@@ -40,7 +38,6 @@ import frc.robot.subsystems.spindexerSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ShooterPrototype mShooterPrototype = new ShooterPrototype();
   private final IntakeSubsystem mIntakeSubsystem = new IntakeSubsystem();
   private final UptakeSubsystem mUptakeSubsystem = new UptakeSubsystem();
@@ -72,7 +69,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     //Swerve
-    mSwerveSubsystem.setDefaultCommand(new TeleopSwerve(mSwerveSubsystem, ()->driver.getLeftX(), ()->driver.getLeftY(), ()->driver.getRightX(), ()-> false));
+    mSwerveSubsystem.setDefaultCommand(new TeleopSwerve(mSwerveSubsystem, ()->driver.getLeftY(), ()->driver.getLeftX(), ()->driver.getRightX(), ()-> false));
     driver.rightStick().onTrue(new ResetGyro(mSwerveSubsystem));
 
     //Shooter Controls
@@ -133,6 +130,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return new Command() {
+    };
   }
 }

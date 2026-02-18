@@ -16,7 +16,7 @@ import frc.robot.Constants.shooterConstants;
 
 public class ShooterRotateSubsystem extends SubsystemBase {
   /** Creates a new ShooterRotateSubsystem. */
-  public static TalonFX shooterRotateMotor = new TalonFX(shooterConstants.shooterRotateMotorID);
+  public static TalonFX shooterRotateMotor = new TalonFX(shooterConstants.shooterRotateMotorID, "*");
 
   public static TalonFXConfiguration shooterRotateConfig = new TalonFXConfiguration();
 

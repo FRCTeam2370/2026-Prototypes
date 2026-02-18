@@ -18,8 +18,8 @@ import frc.robot.Constants.shooterConstants;
 
 public class ShooterPrototype extends SubsystemBase {
 
-  public static TalonFX shooterMotorOne = new TalonFX(shooterConstants.shooterMotorOneID);
-  public static TalonFX shooterMotorTwo = new TalonFX(shooterConstants.shooterMotorTwoID);
+  public static TalonFX shooterMotorOne = new TalonFX(shooterConstants.shooterMotorOneID, "*");
+  public static TalonFX shooterMotorTwo = new TalonFX(shooterConstants.shooterMotorTwoID, "*");
 
   public static TalonFXConfiguration shooterMotorOneConfig = new TalonFXConfiguration();
   public static TalonFXConfiguration shooterMotorTwoConfig = new TalonFXConfiguration();

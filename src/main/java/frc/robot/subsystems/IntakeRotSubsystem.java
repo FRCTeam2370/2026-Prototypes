@@ -15,7 +15,7 @@ import frc.robot.Constants.intakeConstants;
 
 public class IntakeRotSubsystem extends SubsystemBase {
   /** Creates a new IntakeRotSubsystem. */
-  public static TalonFX intakeRotationMotor = new TalonFX(intakeConstants.intakeRotationMotorID);
+  public static TalonFX intakeRotationMotor = new TalonFX(intakeConstants.intakeRotationMotorID, "*");
 
   public static TalonFXConfiguration intakeRotationMotorConfig = new TalonFXConfiguration();
 

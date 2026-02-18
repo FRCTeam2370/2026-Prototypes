@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.spindexerConstants;
 
 public class spindexerSubsystem extends SubsystemBase {
-  public static TalonFX spindexerMotor = new TalonFX(spindexerConstants.spindexerMotorID);
+  public static TalonFX spindexerMotor = new TalonFX(spindexerConstants.spindexerMotorID, "*");
 
   public static TalonFXConfiguration spindexerMotorConfig = new TalonFXConfiguration();
 

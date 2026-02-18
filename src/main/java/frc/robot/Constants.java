@@ -28,34 +28,38 @@ public final class Constants {
   }
 
   public static class shooterConstants {
-    public static final int shooterMotorOneID = 0;
-    public static final int shooterMotorTwoID = 1;
-    public static final int shooterAimMotorID = 2;
-    public static final int shooterRotateMotorID = 7;
+    public static final int shooterMotorOneID = 25;
+    public static final int shooterMotorTwoID = 26;
+    public static final int shooterAimMotorID = 27;
+    public static final int shooterRotateMotorID = 28;
 
     public static final int shooterSpeed = 60;
     public static final double shooterAimSpeed = .025;
     public static final double shooterRotateSpeed = .025;
   }
 
-  public static class intakeConstants{
-    public static final int intakeMotorID = 3;
-    public static final int intakeRotationMotorID = 8;
-
-    public static final double intakeSpeed = .7;
-    public static final double intakeRotationSpeed = .4;
-  }
-
   public static class uptakeConstants{
-    public static final int uptakeMotorID = 4;
+    public static final int uptakeMotorID = 29;
 
     public static final int uptakeSpeed = 50;
   }
 
   public static class spindexerConstants{
-    public static final int spindexerMotorID = 5;
+    public static final int spindexerMotorID = 30;
 
     public static double spindexerSpeed = 1;
+  }
+
+  public static class intakeConstants{
+    public static final int intakeMotorID = 31;
+    public static final int intakeRotationMotorID = 32;
+
+    public static final double intakeSpeed = .7;
+    public static final double intakeRotationSpeed = .4;
+  }
+
+  public static class pigeonConstants{
+    public static final int pigeonID = 1;
   }
 
   public static class SwerveConstants {
@@ -109,9 +113,9 @@ public final class Constants {
 
     //MODULE 1
     public static class FRConstants {
-        public static final int driveMotorID = 21;
-        public static final int turnMotorID = 22;
-        public static final int CANCoderID = 23;
+        public static final int driveMotorID = 13;
+        public static final int turnMotorID = 14;
+        public static final int CANCoderID = 15;
 
         public static final InvertedValue driveInverted = InvertedValue.CounterClockwise_Positive;
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
@@ -124,9 +128,9 @@ public final class Constants {
 
     //MODULE 0
     public static class FLConstants {
-        public static final int driveMotorID = 11;
-        public static final int turnMotorID = 12;
-        public static final int CANCoderID = 13;
+        public static final int driveMotorID = 10;
+        public static final int turnMotorID = 11;
+        public static final int CANCoderID = 12;
 
         public static final InvertedValue driveInverted = InvertedValue.Clockwise_Positive;
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
@@ -139,9 +143,9 @@ public final class Constants {
 
     //MODULE 3
     public static class BRConstants {
-        public static final int driveMotorID = 31;
-        public static final int turnMotorID = 32;
-        public static final int CANCoderID = 33;
+        public static final int driveMotorID = 16;
+        public static final int turnMotorID = 17;
+        public static final int CANCoderID = 18;
 
         public static final InvertedValue driveInverted = InvertedValue.CounterClockwise_Positive;
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
@@ -154,9 +158,9 @@ public final class Constants {
 
     //MODULE 2
     public static class BLConstants {
-        public static final int driveMotorID = 41;
-        public static final int turnMotorID = 42;
-        public static final int CANCoderID = 43;
+        public static final int driveMotorID = 19;
+        public static final int turnMotorID = 20;
+        public static final int CANCoderID = 21;
 
         public static final InvertedValue driveInverted = InvertedValue.Clockwise_Positive;
         public static final InvertedValue turnInverted = InvertedValue.Clockwise_Positive;
