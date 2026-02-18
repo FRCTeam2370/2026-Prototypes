@@ -39,6 +39,10 @@ public class ShooterPrototype extends SubsystemBase {
     }
   }
 
+  public static double getVelocity(){
+    return shooterMotorOne.getVelocity().getValueAsDouble();
+  }
+
   public static void shootPrototype(double speed) {
     shooterMotorOne.set(speed);
     shooterMotorTwo.set(speed);

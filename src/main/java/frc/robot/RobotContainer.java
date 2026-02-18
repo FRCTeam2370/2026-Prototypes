@@ -14,8 +14,10 @@ import frc.robot.Constants.spindexerConstants;
 import frc.robot.Constants.uptakeConstants;
 import frc.robot.commands.Intake.IntakeControl;
 import frc.robot.commands.Intake.IntakeRotationControl;
+import frc.robot.commands.Intake.IntakeSetPosition;
 import frc.robot.commands.Shooter.AimManualControl;
 import frc.robot.commands.Shooter.ControlShooterRotate;
+import frc.robot.commands.Shooter.ShootAtVeolcity;
 import frc.robot.commands.Shooter.ShootShooter;
 import frc.robot.commands.Spindexer.controlSpindexer;
 import frc.robot.commands.Swerve.ResetGyro;
@@ -69,29 +71,36 @@ public class RobotContainer {
    */
   private void configureBindings() {
     //Swerve
-    mSwerveSubsystem.setDefaultCommand(new TeleopSwerve(mSwerveSubsystem, ()->driver.getLeftY(), ()->driver.getLeftX(), ()->driver.getRightX(), ()-> false));
+    mSwerveSubsystem.setDefaultCommand(new TeleopSwerve(mSwerveSubsystem, ()->driver.getLeftY(), ()->driver.getLeftX(), ()->-driver.getRightX(), ()-> false));
     driver.rightStick().onTrue(new ResetGyro(mSwerveSubsystem));
 
     //Shooter Controls
+    /*TODO: bring this back later
     driver.rightTrigger().whileTrue(new ShootShooter(mShooterPrototype, shooterConstants.shooterSpeed));
     driver.leftTrigger().whileTrue(new ShootShooter(mShooterPrototype, -shooterConstants.shooterSpeed));
     driver.y().whileTrue(new AimManualControl(mShooterAimSubsystem, shooterConstants.shooterAimSpeed));
     driver.a().whileTrue(new AimManualControl(mShooterAimSubsystem, -shooterConstants.shooterAimSpeed));
+    */
 
     //Uptake Controls
     driver.rightBumper().whileTrue(new UptakeFuel(mUptakeSubsystem, uptakeConstants.uptakeSpeed));
     driver.leftBumper().whileTrue(new UptakeFuel(mUptakeSubsystem, -uptakeConstants.uptakeSpeed));
 
     //Shooter Rotation Controls
+    /*TODO: bring this back later
     driver.x().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, shooterConstants.shooterRotateSpeed));
     driver.b().whileTrue(new ControlShooterRotate(mShooterRotateSubsystem, -shooterConstants.shooterRotateSpeed));
+    */
     // driver.x().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 0));
     // driver.b().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, -1.4));
     // driver.povUp().onTrue(new ShooterRotatePos(mShooterRotateSubsystem, 1.7));
 
     //Intake Controls
-    operator.y().whileTrue(new IntakeControl(mIntakeSubsystem, intakeConstants.intakeSpeed));
-    operator.a().whileTrue(new IntakeControl(mIntakeSubsystem, -intakeConstants.intakeSpeed));
+    driver.y().toggleOnTrue(new IntakeControl(mIntakeSubsystem, intakeConstants.intakeSpeed));
+    driver.x().toggleOnTrue(new IntakeControl(mIntakeSubsystem, -intakeConstants.intakeSpeed));
+    driver.rightTrigger().toggleOnTrue(new ShootAtVeolcity(20, mShooterPrototype, mUptakeSubsystem, mSpindexerSubsystem));
+    driver.a().onTrue(new IntakeSetPosition(mIntakeRotSubsystem, 0));
+    driver.b().onTrue(new IntakeSetPosition(mIntakeRotSubsystem, 4));
 
     //Spindexer Controls
     operator.rightTrigger().whileTrue(new controlSpindexer(mSpindexerSubsystem, spindexerConstants.spindexerSpeed));
