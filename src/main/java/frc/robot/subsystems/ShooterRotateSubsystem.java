@@ -25,6 +25,7 @@ public class ShooterRotateSubsystem extends SubsystemBase {
 
   public ShooterRotateSubsystem() {
     shooterRotateConfiguration();
+    shooterZero();
   }
 
   public static void shooterRotate(double position) {
@@ -35,6 +36,14 @@ public class ShooterRotateSubsystem extends SubsystemBase {
     shooterRotateMotor.set(speed);
   }
 
+  public static void shooterZero(){
+    if (ShooterRotateSubsystem.shooterRotateMotor.getStatorCurrent().getValueAsDouble() >= 1) {
+      ShooterRotateSubsystem.shooterManualRotate(-0.1);
+    } else {
+      ShooterRotateSubsystem.shooterRotateMotor.setPosition(0);
+    }
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -43,8 +52,6 @@ public class ShooterRotateSubsystem extends SubsystemBase {
   }
 
   public static void shooterRotateConfiguration() {
-    shooterRotateMotor.setPosition(0);
-
     shooterRotateMotor.setNeutralMode(NeutralModeValue.Coast);
 
     shooterRotateConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;

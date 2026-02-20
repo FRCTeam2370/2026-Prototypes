@@ -5,6 +5,8 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.spindexerConstants;
+import frc.robot.Constants.uptakeConstants;
 import frc.robot.subsystems.ShooterPrototype;
 import frc.robot.subsystems.UptakeSubsystem;
 import frc.robot.subsystems.spindexerSubsystem;
@@ -13,7 +15,7 @@ import frc.robot.subsystems.spindexerSubsystem;
 public class ShootAtVeolcity extends Command {
   double vel;
   /** Creates a new ShootAtVeolcity. */
-  public ShootAtVeolcity(double vel, ShooterPrototype mShooterPrototype, UptakeSubsystem mUptakeSubsystem, spindexerSubsystem mSpindexerSubsystem) {
+  public ShootAtVeolcity(ShooterPrototype mShooterPrototype, UptakeSubsystem mUptakeSubsystem, spindexerSubsystem mSpindexerSubsystem, double vel) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.vel = vel;
     addRequirements(mShooterPrototype, mUptakeSubsystem, mSpindexerSubsystem);
@@ -28,8 +30,8 @@ public class ShootAtVeolcity extends Command {
   public void execute() {
     ShooterPrototype.shootWithVelocity(vel);
     if(ShooterPrototype.getVelocity() > vel * 0.975){
-      UptakeSubsystem.uptakeWithVelocity(50);
-      spindexerSubsystem.spindexrWithVelocity(50);
+      UptakeSubsystem.uptakeWithVelocity(uptakeConstants.uptakeSpeed);
+      spindexerSubsystem.spindexrWithVelocity(spindexerConstants.spindexerSpeed);
     }
   }
 
